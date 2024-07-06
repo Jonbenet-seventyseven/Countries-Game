@@ -7,6 +7,12 @@ h1 {
     text-align: center;
 }
 
+#counter {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
