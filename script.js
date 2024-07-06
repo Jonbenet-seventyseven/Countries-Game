@@ -38,4 +38,18 @@ document.addEventListener("DOMContentLoaded", async function() {
         const response = await fetch(filePath);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-        const text
+        const text = await response.text();
+        countries = text.split('\n').map(country => country.trim()).filter(Boolean);
+
+        if (countries.length === 0) {
+            throw new Error('No countries found in file');
+        }
+
+        countries.forEach(country => {
+            const li = document.createElement("li");
+            li.textContent = country;
+            li.addEventListener("click", function() {
+                li.classList.toggle("crossed-out");
+                updateCounter();
+            });
+            countryList.appendChild(li);
