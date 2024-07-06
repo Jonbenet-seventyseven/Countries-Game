@@ -1,24 +1,15 @@
 document.addEventListener("DOMContentLoaded", async function() {
     const countryList = document.getElementById("country-list");
-    const corsProxy = 'https://corsproxy.io/?';
-    const wikipediaUrl = 'https://simple.wikipedia.org/wiki/List_of_countries';
+    const filePath = 'country-list.txt'; // Path to the local text file
 
     try {
-        const response = await fetch(`${corsProxy}${encodeURIComponent(wikipediaUrl)}`);
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
         const text = await response.text();
+        const countries = text.split('\n').map(country => country.trim()).filter(Boolean);
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-
-        // Modify this selector if Wikipedia's structure changes
-        const countryLinks = doc.querySelectorAll('.wikitable tbody tr td:first-child a');
-
-        if (countryLinks.length === 0) {
-            throw new Error('No countries found');
-        }
-
-        countryLinks.forEach(link => {
-            const country = link.textContent.trim();
+        countries.forEach(country => {
             const li = document.createElement("li");
             li.textContent = country;
             li.addEventListener("click", function() {
