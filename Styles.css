@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+li.crossed-out {
+    text-decoration: line-through;
+    background-color: #d0d0d0;
+}
