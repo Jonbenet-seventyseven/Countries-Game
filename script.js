@@ -53,3 +53,21 @@ document.addEventListener("DOMContentLoaded", async function() {
                 updateCounter();
             });
             countryList.appendChild(li);
+        });
+
+        // Initialize the counter
+        updateCounter();
+
+        // Initialize search functionality
+        searchBar.addEventListener('input', (event) => {
+            filterCountries(event.target.value);
+        });
+
+        // Initialize clear button functionality
+        clearButton.addEventListener('click', clearCrossedOut);
+
+    } catch (error) {
+        console.error('Error fetching country list:', error);
+        countryList.innerHTML = `<li>${error.message}</li>`;
+    }
+});
