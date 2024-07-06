@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", async function() {
     const countryList = document.getElementById("country-list");
-    const counter = document.getElementById("counter");
+    const totalCountriesElement = document.getElementById("total-countries");
+    const crossedOutCountElement = document.getElementById("crossed-out-count");
+    const remainingCountriesElement = document.getElementById("remaining-countries");
     const filePath = 'country-list.txt'; // Path to the local text file
 
     const updateCounter = () => {
+        const totalCountries = document.querySelectorAll('#country-list li').length;
         const crossedOutCount = document.querySelectorAll('.crossed-out').length;
-        counter.textContent = `Crossed out countries: ${crossedOutCount}`;
+        const remainingCountries = totalCountries - crossedOutCount;
+
+        totalCountriesElement.textContent = totalCountries;
+        crossedOutCountElement.textContent = crossedOutCount;
+        remainingCountriesElement.textContent = remainingCountries;
     };
 
     try {
